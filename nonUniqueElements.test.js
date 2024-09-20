@@ -1,5 +1,11 @@
 import nonUniqueElements from './nonUniqueElements';
 
+test('Возвращает false для неправильного типа данных', () => {
+  expect(nonUniqueElements(1231)).toBe(false)
+  expect(nonUniqueElements(null)).toBe(false)
+  expect(nonUniqueElements(undefined)).toBe(false)
+  expect(nonUniqueElements(NaN)).toBe(false)
+})
 
 test('returns non unique elements', () => {
   expect(nonUniqueElements([1, 2, 3, 1, 3])).toEqual([1, 3, 1, 3]);
