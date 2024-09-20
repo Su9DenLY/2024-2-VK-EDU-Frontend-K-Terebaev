@@ -13,6 +13,9 @@ test('Возвращает false для неправильного типа да
   expect(convertBytesToHuman(-1)).toBe(false)
   expect(convertBytesToHuman('string')).toBe(false)
   expect(convertBytesToHuman([1, 2, 3, 4, 5])).toBe(false)
+  expect(convertBytesToHuman(null)).toBe(false)
+  expect(convertBytesToHuman(NaN)).toBe(false)
+  expect(convertBytesToHuman(undefined)).toBe(false)
   expect(convertBytesToHuman(-1)).not.toBe("1 B")
 });
 

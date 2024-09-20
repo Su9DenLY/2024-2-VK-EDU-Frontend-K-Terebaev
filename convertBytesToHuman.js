@@ -13,7 +13,7 @@
  */
 
 export default function convertBytesToHuman(bytes) {
-  if (bytes < 0 || typeof bytes !== "number") {
+  if (bytes < 0 || typeof bytes !== "number" || isNaN(bytes)) {
       return false
   }
   const units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
