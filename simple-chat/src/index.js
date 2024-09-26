@@ -97,5 +97,4 @@ function handleKeyPress(event) {
 function autoResize() {
     input.style.height = '0px';
     input.style.height = input.scrollHeight + 'px';
-    section.style.height = `calc(100vh - 7vh - ${input.style.height})`
 }
