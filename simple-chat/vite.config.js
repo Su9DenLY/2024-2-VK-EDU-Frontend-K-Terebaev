@@ -8,7 +8,7 @@ export default {
         }
     },
     build: {
-        outDir: 'src/dist',
+        outDir: 'dist',
         emptyOutDir: true,
     }
 }
