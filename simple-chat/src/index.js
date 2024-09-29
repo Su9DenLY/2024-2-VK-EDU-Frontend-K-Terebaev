@@ -1,81 +1,89 @@
+let messages = [];
+
 const form = document.querySelector('form');
 const input = document.querySelector('.form-textarea');
 const section = document.querySelector('.section');
+const deleteButton = document.getElementById('delete-button')
 
 form.addEventListener('submit', handleSubmit.bind(this));
 form.addEventListener('keypress', handleKeyPress.bind(this));
-window.addEventListener('load', renderMessages);
+window.addEventListener('beforeunload', saveMessages);
 input.addEventListener('input', autoResize);
 
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
+deleteButton.addEventListener('click', () => {
+    messages = []
+    localStorage.clear()
+    renderMessages()
+});
+
+loadMessages();
+renderMessages();
+
+function loadMessages() {
+    messages = JSON.parse(localStorage.getItem('messages')) || []
+}
+
+function saveMessages() {
+    localStorage.setItem('messages', JSON.stringify(messages));
+}
+
+function addMessage(username, text, time) {
+    messages.push({username, text, time});
+    const messageContainer = createMessageContainer(username, text, time)
+    section.prepend(messageContainer);
+    setTimeout(() => {
+        messageContainer.scrollIntoView({behavior: 'smooth'});
+    }, 0)
+}
+
+function createMessageContainer(username, text, time) {
+    const messageContainer = document.createElement('div');
+    const messageContent = document.createElement('div');
+    const messageUsername = document.createElement('div');
+    const messageStatus = document.createElement('div');
+    const checkMark = document.createElement('span');
+
+    messageContainer.classList.add('message-container');
+    messageContent.classList.add('message-content');
+    messageStatus.classList.add('message-status');
+    messageUsername.classList.add('message-username');
+    checkMark.classList.add('material-symbols-outlined');
+    checkMark.style.fontSize = '14px';
+
+    messageUsername.innerHTML = `${username}`
+    messageContent.innerHTML = `<div>${text.replace(/\n/g, '<br>')}</div>`;
+    messageStatus.innerText = `${time}`
+
+    checkMark.innerText = `check`
+
+    messageStatus.appendChild(checkMark);
+    messageContent.appendChild(messageStatus);
+    messageContainer.appendChild(messageUsername);
+    messageContainer.appendChild(messageContent);
+    return messageContainer;
 }
 
 function renderMessages() {
     section.innerHTML = '';
-
-    const messages = JSON.parse(localStorage.getItem('messages')) || [];
-
-    messages.reverse().forEach((messageItem, index) => {
-        const messageContainer = document.createElement('div');
-        const messageContent = document.createElement('div');
-        const messageUsername = document.createElement('div');
-        const messageStatus = document.createElement('div');
-        const checkMark = document.createElement('span');
-        messageContainer.classList.add('message-container');
-        messageContent.classList.add('message-content');
-        messageStatus.classList.add('message-status');
-        messageUsername.classList.add('message-username');
-        checkMark.classList.add('material-symbols-outlined');
-        checkMark.style.fontSize = '14px';
-        messageUsername.innerHTML = `
-            ${messageItem.username}
-        `
-        messageContent.innerHTML = `
-            <div>${messageItem.text.trim().replace(/\n/g, '<br>')}</div>
-        `;
-        messageStatus.innerHTML = `
-            ${messageItem.time}
-        `
-        checkMark.innerHTML = `
-            check
-        `
-        messageStatus.appendChild(checkMark);
-        messageContent.appendChild(messageStatus);
-        messageContainer.appendChild(messageUsername);
-        messageContainer.appendChild(messageContent);
+    for (let i = messages.length - 1; i >= 0; i--) {
+        const {username, text, time} = messages[i];
+        const messageContainer = createMessageContainer(username, text, time);
         section.appendChild(messageContainer);
-        if (index === 0) {
-            setTimeout(() => {
-                messageContainer.scrollIntoView({behavior: 'smooth'});
-            }, 0);
-        }
-
-    });
+    }
+    setTimeout(() => {
+        section.scrollTop = section.scrollHeight;
+    }, 0)
     input.dispatchEvent(new Event('input'));
 }
 
 function handleSubmit(event) {
-    if (input.value.trim()) {
-        event.preventDefault()
+    event.preventDefault()
+    const messageText = input.value.trim()
+    if (messageText) {
         let time = new Date()
-        const messageObj = {
-            username: "Элизабет",
-            text: input.value,
-            time: `${time.getHours()}`.padStart(2, '0') + ':' + `${time.getMinutes()}`.padStart(2, '0'),
-        }
-
-        let messages = JSON.parse(localStorage.getItem('messages')) || []
-        messages.push(messageObj)
-        localStorage.setItem(`messages`, JSON.stringify(messages))
-
+        const username = 'Элизабет'
+        addMessage(username, messageText, `${time.getHours()}`.padStart(2, '0') + ':' + `${time.getMinutes()}`.padStart(2, '0'));
         input.value = ''
-
-        renderMessages()
     }
 }
 
