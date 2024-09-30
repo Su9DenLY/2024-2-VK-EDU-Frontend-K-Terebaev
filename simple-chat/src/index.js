@@ -2,13 +2,22 @@ let messages = [];
 
 const form = document.querySelector('form');
 const input = document.querySelector('.form-textarea');
-const section = document.querySelector('.section');
+const sectionMessages = document.querySelector('.section-messages');
 const deleteButton = document.getElementById('delete-button')
 
 form.addEventListener('submit', handleSubmit.bind(this));
 form.addEventListener('keypress', handleKeyPress.bind(this));
 window.addEventListener('beforeunload', saveMessages);
 input.addEventListener('input', autoResize);
+
+function escapeHTML(str) {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 
 deleteButton.addEventListener('click', () => {
     messages = []
@@ -30,7 +39,7 @@ function saveMessages() {
 function addMessage(username, text, time) {
     messages.push({username, text, time});
     const messageContainer = createMessageContainer(username, text, time)
-    section.prepend(messageContainer);
+    sectionMessages.appendChild(messageContainer);
     setTimeout(() => {
         messageContainer.scrollIntoView({behavior: 'smooth'});
     }, 0)
@@ -50,8 +59,8 @@ function createMessageContainer(username, text, time) {
     checkMark.classList.add('material-symbols-outlined');
     checkMark.style.fontSize = '14px';
 
-    messageUsername.innerHTML = `${username}`
-    messageContent.innerHTML = `<div>${text.replace(/\n/g, '<br>')}</div>`;
+    messageUsername.innerText = `${username}`
+    messageContent.innerHTML = `<div>${escapeHTML(text).replace(/\n/g, '<br>')}</div>`;
     messageStatus.innerText = `${time}`
 
     checkMark.innerText = `check`
@@ -64,14 +73,15 @@ function createMessageContainer(username, text, time) {
 }
 
 function renderMessages() {
-    section.innerHTML = '';
-    for (let i = messages.length - 1; i >= 0; i--) {
-        const {username, text, time} = messages[i];
+    sectionMessages.innerHTML = '';
+    messages.forEach((messageItem) => {
+        const {username, text, time} = messageItem;
         const messageContainer = createMessageContainer(username, text, time);
-        section.appendChild(messageContainer);
-    }
+        sectionMessages.appendChild(messageContainer);
+
+    })
     setTimeout(() => {
-        section.scrollTop = section.scrollHeight;
+        sectionMessages.scrollTop = sectionMessages.scrollHeight;
     }, 0)
     input.dispatchEvent(new Event('input'));
 }
