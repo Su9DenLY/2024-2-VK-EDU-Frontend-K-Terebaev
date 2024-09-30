@@ -1,8 +1,10 @@
 let messages = [];
+const myUsername = 'Элизабет'
 
 const form = document.querySelector('form');
 const input = document.querySelector('.form-textarea');
 const sectionMessages = document.querySelector('.section-messages');
+const section = document.querySelector('.section');
 const deleteButton = document.getElementById('delete-button')
 
 form.addEventListener('submit', handleSubmit.bind(this));
@@ -41,7 +43,7 @@ function addMessage(username, text, time) {
     const messageContainer = createMessageContainer(username, text, time)
     sectionMessages.appendChild(messageContainer);
     setTimeout(() => {
-        messageContainer.scrollIntoView({behavior: 'smooth'});
+        section.scrollTop = section.scrollHeight;
     }, 0)
 }
 
@@ -52,20 +54,26 @@ function createMessageContainer(username, text, time) {
     const messageStatus = document.createElement('div');
     const checkMark = document.createElement('span');
 
-    messageContainer.classList.add('message-container');
-    messageContent.classList.add('message-content');
-    messageStatus.classList.add('message-status');
-    messageUsername.classList.add('message-username');
-    checkMark.classList.add('material-symbols-outlined');
-    checkMark.style.fontSize = '14px';
-
     messageUsername.innerText = `${username}`
-    messageContent.innerHTML = `<div>${escapeHTML(text).replace(/\n/g, '<br>')}</div>`;
+    messageContent.innerText = text;
     messageStatus.innerText = `${time}`
 
-    checkMark.innerText = `check`
-
-    messageStatus.appendChild(checkMark);
+    if (username === myUsername) {
+        messageContainer.classList.add('message-my-container');
+        messageContent.classList.add('message-my-content');
+        messageStatus.classList.add('message-status');
+        messageUsername.classList.add('message-my-username');
+        checkMark.classList.add('material-symbols-outlined');
+        checkMark.style.fontSize = '14px';
+        checkMark.innerText = `check`
+        messageStatus.appendChild(checkMark);
+    } else {
+        messageContainer.classList.add('message-other-container');
+        messageContent.classList.add('message-other-content');
+        messageStatus.classList.add('message-status');
+        messageUsername.classList.add('message-other-username');
+    }
+    
     messageContent.appendChild(messageStatus);
     messageContainer.appendChild(messageUsername);
     messageContainer.appendChild(messageContent);
@@ -74,11 +82,14 @@ function createMessageContainer(username, text, time) {
 
 function renderMessages() {
     sectionMessages.innerHTML = '';
+    sectionMessages.appendChild(createMessageContainer('Дженнифер', 'Привет!', '11:24'));
+    sectionMessages.appendChild(createMessageContainer(myUsername, 'Привет', '11:24'));
+    sectionMessages.appendChild(createMessageContainer('Дженнифер', 'Как дела?', '11:24'));
+    sectionMessages.appendChild(createMessageContainer('Дженнифер', 'Что делаешь?', '11:25'));
     messages.forEach((messageItem) => {
         const {username, text, time} = messageItem;
         const messageContainer = createMessageContainer(username, text, time);
         sectionMessages.appendChild(messageContainer);
-
     })
     setTimeout(() => {
         sectionMessages.scrollTop = sectionMessages.scrollHeight;
