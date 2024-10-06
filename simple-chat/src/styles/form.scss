@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  background-color: white;
+  border-top: 1px solid #ccc;
+  height: fit-content;
+
+  &-textarea {
+    border: 0;
+    outline: none;
+    width: calc(100% - 2px);
+    padding: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    height: 100%;
+    resize: none;
+    max-height: 20vh;
+    overflow: auto;
+  }
+}

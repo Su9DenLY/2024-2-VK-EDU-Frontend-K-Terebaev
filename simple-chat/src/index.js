@@ -1,129 +1,66 @@
-let messages = [];
-const myUsername = 'Элизабет'
+import renderMessagesPage from './scripts/chat'
+import renderChatListPage from './scripts/chatlist'
+import renderLoginPage from './scripts/login'
 
-const form = document.querySelector('form');
-const input = document.querySelector('.form-textarea');
-const sectionMessages = document.querySelector('.section-messages');
-const section = document.querySelector('.section');
-const deleteButton = document.getElementById('delete-button')
+export const base = '/2024-2-VK-EDU-Frontend-K-Terebaev/'
 
-form.addEventListener('submit', handleSubmit.bind(this));
-form.addEventListener('keypress', handleKeyPress.bind(this));
-window.addEventListener('beforeunload', saveMessages);
-input.addEventListener('input', autoResize);
+const wrapper = document.querySelector('.wrapper');
+let username = localStorage.getItem('username')
+let users = JSON.parse(localStorage.getItem('users')) || []
+const chats = JSON.parse(localStorage.getItem('chats')) || []
 
-function escapeHTML(str) {
-    return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+if (users.length === 0 && chats.length === 0) {
+    users.push({'id': 1, 'username': 'Элизабет', 'chats': [1, 3]})
+    users.push({'id': 2, 'username': 'Дженнифер', 'chats': [1, 2, 4]})
+    users.push({'id': 3, 'username': 'Иннокентий', 'chats': [4]})
+    users.push({'id': 4, 'username': 'Евлампий', 'chats': [2, 3]})
+    chats.push({'id': 1, 'users': [1, 2], 'messages': []})
+    chats.push({'id': 2, 'users': [2, 4], 'messages': []})
+    chats.push({'id': 3, 'users': [1, 4], 'messages': []})
+    chats.push({'id': 4, 'users': [2, 3], 'messages': []})
+    localStorage.setItem('users', JSON.stringify(users))
+    localStorage.setItem('chats', JSON.stringify(chats))
 }
 
-deleteButton.addEventListener('click', () => {
-    messages = []
-    localStorage.clear()
-    renderMessages()
+export function navigateTo(url) {
+    history.pushState({}, '', url);
+    renderPage(url);
+}
+
+function renderPage(url) {
+    wrapper.innerHTML = '';
+    username = localStorage.getItem('username');
+    users = JSON.parse(localStorage.getItem('users')) || []
+    if (!username && (url !== `${base}`)) {
+        navigateTo(`${base}`);
+        return;
+    }
+    if (url === `${base}` || !username) {
+        renderLoginPage(wrapper);
+    } else if (url === `${base}chat`) {
+        const userId = users.find(userItem => userItem.username === username).id || 0
+        renderChatListPage(wrapper, userId);
+    } else if (url.startsWith(`${base}chat`)) {
+        const userId = users.find(userItem => userItem.username === username).id || 0
+        const chatId = parseInt(url.split('/chat/')[1]);
+        const chatItem = chats.find(chatItem => chatItem.id === chatId);
+        const recipientId = chatItem.users.find(id => id !== userId)
+        const recipientName = users.find(userItem => userItem.id === recipientId).username;
+        renderMessagesPage(wrapper, chatId, recipientName);
+    } else {
+        navigateTo(`${base}`);
+    }
+}
+
+window.addEventListener('load', () => {
+    username = localStorage.getItem('username')
+    if (username) {
+        renderPage(window.location.pathname);
+    } else {
+        navigateTo(`${base}`)
+    }
 });
 
-loadMessages();
-renderMessages();
-
-function loadMessages() {
-    messages = JSON.parse(localStorage.getItem('messages')) || []
-}
-
-function saveMessages() {
-    localStorage.setItem('messages', JSON.stringify(messages));
-}
-
-function addMessage(username, text, time) {
-    messages.push({username, text, time});
-    const messageContainer = createMessageContainer(username, text, time)
-    sectionMessages.appendChild(messageContainer);
-    setTimeout(() => {
-        section.scrollTop = section.scrollHeight;
-    }, 0)
-}
-
-function createMessageContainer(username, text, time) {
-    const messageContainer = document.createElement('div');
-    const messageContent = document.createElement('div');
-    const messageUsername = document.createElement('div');
-    const messageStatus = document.createElement('div');
-    const checkMark = document.createElement('span');
-
-    messageUsername.innerText = `${username}`
-    messageContent.innerText = text;
-    messageStatus.innerText = `${time}`
-
-    if (username === myUsername) {
-        messageContainer.classList.add('message-my-container');
-        messageContent.classList.add('message-my-content');
-        messageStatus.classList.add('message-status');
-        messageUsername.classList.add('message-my-username');
-        checkMark.classList.add('material-symbols-outlined');
-        checkMark.style.fontSize = '14px';
-        checkMark.innerText = `check`
-        messageStatus.appendChild(checkMark);
-    } else {
-        messageContainer.classList.add('message-other-container');
-        messageContent.classList.add('message-other-content');
-        messageStatus.classList.add('message-status');
-        messageUsername.classList.add('message-other-username');
-    }
-    
-    messageContent.appendChild(messageStatus);
-    messageContainer.appendChild(messageUsername);
-    messageContainer.appendChild(messageContent);
-    return messageContainer;
-}
-
-function renderMessages() {
-    sectionMessages.innerHTML = '';
-    sectionMessages.appendChild(createMessageContainer('Дженнифер', 'Привет!', '11:24'));
-    sectionMessages.appendChild(createMessageContainer(myUsername, 'Привет', '11:24'));
-    sectionMessages.appendChild(createMessageContainer('Дженнифер', 'Как дела?', '11:24'));
-    sectionMessages.appendChild(createMessageContainer('Дженнифер', 'Что делаешь?', '11:25'));
-    messages.forEach((messageItem) => {
-        const {username, text, time} = messageItem;
-        const messageContainer = createMessageContainer(username, text, time);
-        sectionMessages.appendChild(messageContainer);
-    })
-    setTimeout(() => {
-        sectionMessages.scrollTop = sectionMessages.scrollHeight;
-    }, 0)
-    input.dispatchEvent(new Event('input'));
-}
-
-function handleSubmit(event) {
-    event.preventDefault()
-    const messageText = input.value.trim()
-    if (messageText) {
-        let time = new Date()
-        const username = 'Элизабет'
-        addMessage(username, messageText, `${time.getHours()}`.padStart(2, '0') + ':' + `${time.getMinutes()}`.padStart(2, '0'));
-        input.value = ''
-    }
-}
-
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        if (event.shiftKey) {
-            const cursorPos = input.selectionStart;
-            input.value = input.value.slice(0, cursorPos) + '\n' + input.value.slice(cursorPos);
-            input.selectionStart = input.selectionEnd = cursorPos + 1;
-        } else {
-            form.dispatchEvent(new Event('submit'));
-        }
-        input.dispatchEvent(new Event('input'));
-        input.scrollTop = input.scrollHeight
-    }
-}
-
-function autoResize() {
-    input.style.height = '0px';
-    input.style.height = input.scrollHeight + 'px';
-}
+window.addEventListener('popstate', () => {
+    renderPage(window.location.pathname);
+});
