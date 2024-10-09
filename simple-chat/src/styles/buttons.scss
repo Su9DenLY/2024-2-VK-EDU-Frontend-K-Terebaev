@@ -1,0 +1,61 @@
+@mixin button-styles {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 10px;
+  width: fit-content;
+  background-color: transparent;
+  border-radius: 20px;
+  transition: background-color 0.25s;
+  &:focus {
+    outline: none;
+  }
+}
+
+.button {
+  &-white {
+    color: white;
+    @include button-styles;
+
+    &:hover {
+      background-color: #bdbbbb76;
+      cursor: pointer;
+    }
+  }
+
+  &-gray {
+    @include button-styles;
+    color: #858585;
+
+    &:hover {
+      background-color: #bdbbbb76;
+      cursor: pointer;
+    }
+  }
+
+  &-send {
+    @include button-styles;
+    background-color: #f4affacd;
+    transition: box-shadow 0.25s;
+
+    &:hover {
+      box-shadow: 0 0.5px 10px 0.1px rgba(0, 0, 0, 0.5);
+      transition: box-shadow 0.25s;
+      cursor: pointer;
+    }
+  }
+
+  &-add-chat {
+    @include button-styles;
+    background-color: #dd89f5;
+    position: absolute;
+    bottom: 20px;
+    right: 25px;
+
+    &:hover {
+      box-shadow: 0 0.5px 10px 0.1px rgba(0, 0, 0, 0.5);
+      transition: box-shadow 0.25s;
+      cursor: pointer;
+    }
+  }
+}
