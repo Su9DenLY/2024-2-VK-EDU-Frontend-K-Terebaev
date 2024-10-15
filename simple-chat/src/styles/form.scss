@@ -1,21 +1,31 @@
+@import "animations";
+
 .form {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  background-color: white;
-  border-top: 1px solid #ccc;
+  gap: 5px;
+  background-color: #202329;
   height: fit-content;
+  animation: screenToRight 0.3s ease-in-out forwards;
 
   &-textarea {
     border: 0;
     outline: none;
+    color: #c9c9c9;
     width: calc(100% - 2px);
     padding: 10px;
+    background-color: #2e333d;
+    border-radius: 50px;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 15px;
     height: 100%;
     resize: none;
     max-height: 20vh;
     overflow: auto;
+
+    &::placeholder {
+      color: #88898a;
+    }
   }
 }

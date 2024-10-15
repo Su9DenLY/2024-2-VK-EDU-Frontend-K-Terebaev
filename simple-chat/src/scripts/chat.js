@@ -15,6 +15,7 @@ export default function renderMessagesPage(wrapper, chatId, recipientName) {
     const input = document.querySelector('.form-textarea');
     const sectionMessages = document.querySelector('.section-messages');
     const section = document.querySelector('.section');
+    const sendButton = document.querySelector('.button-send')
     const deleteButton = document.getElementById('delete-button')
     const returnButton = document.getElementById('arrow_back');
 
@@ -25,6 +26,12 @@ export default function renderMessagesPage(wrapper, chatId, recipientName) {
 
     loadMessages();
     renderMessages();
+
+    sendButton.addEventListener('click', () => {
+        form.dispatchEvent(new Event('submit'));
+        input.dispatchEvent(new Event('input'));
+        input.scrollTop = input.scrollHeight
+    });
 
     deleteButton.addEventListener('click', () => {
         let chats = JSON.parse(localStorage.getItem('chats')) || [];
@@ -155,7 +162,7 @@ export default function renderMessagesPage(wrapper, chatId, recipientName) {
 
     function createHeaderContainer() {
         const header = document.createElement('header');
-        header.classList.add('header');
+        header.classList.add('header', 'header-chat');
         header.innerHTML = `
         <button class="button-white" id="arrow_back">
             <span class="material-symbols-outlined">arrow_back</span>
@@ -199,8 +206,8 @@ export default function renderMessagesPage(wrapper, chatId, recipientName) {
                 <span class="material-symbols-outlined">attachment</span>
             </button>
             <textarea class="form-textarea" name="message-text" placeholder="Введите сообщение"></textarea>
-            <button class="button-send">
-                <span>Отправить</span>
+            <button class="button-send" type="button">
+                <span class="material-symbols-outlined">send</span>
             </button>
         </form>`
         return form;

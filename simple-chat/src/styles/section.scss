@@ -1,14 +1,18 @@
+@import "animations";
+
 .section {
   display: flex;
   flex-direction: column-reverse;
   flex-grow: 1;
   overflow-y: auto;
-  
+  overflow-x: hidden;
+
   &-chats {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background-color: #f2f2f2;
+    background-color: #202329;
+    animation: screenToLeft 0.3s ease-in-out forwards;
   }
 
   &-messages {
@@ -17,6 +21,7 @@
     justify-content: flex-end;
     flex-grow: 1;
     padding: 5px 0;
-    background-color: #f2f2f2;
+    background-color: #202329;
+    animation: screenToRight 0.3s ease-in-out forwards;
   }
 }

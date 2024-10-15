@@ -32,7 +32,7 @@ export default function renderChatListPage(wrapper, userId) {
 
     function createHeaderContainer() {
         const header = document.createElement('header')
-        header.classList.add('header')
+        header.classList.add('header', 'header-chat-list')
         header.innerHTML = `
         <div>
             <button class="button-white">
@@ -78,8 +78,7 @@ export default function renderChatListPage(wrapper, userId) {
         chatName.classList.add('chat-name');
         lastMessageMeta.classList.add('chat-last-message-meta');
         lastMessageTime.classList.add('chat-last-message-time');
-        lastMessageCheck.classList.add('chat-last-message-check');
-        lastMessageCheck.classList.add('material-symbols-outlined');
+        lastMessageCheck.classList.add('chat-last-message-check', 'material-symbols-outlined');
         chatInfo.classList.add('chat-info');
         chatInfoRow.classList.add('chat-info-row');
         lastMessageText.classList.add('chat-last-message');
