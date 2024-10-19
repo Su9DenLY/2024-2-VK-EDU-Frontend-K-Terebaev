@@ -5,7 +5,7 @@
     width: 100%;
     align-items: center;
     justify-content: start;
-    background-color: rgb(19, 19, 19);
+    background-color: #202329;
   }
 
   &-form {
@@ -17,10 +17,9 @@
     width: fit-content;
     height: fit-content;
     padding: 50px;
-    background-color: rgb(32, 35, 41);
-    box-shadow: 0 0.5px 20px 5px rgb(46, 51, 61);
+    background-color: rgba(46, 51, 61, 0.7);
     margin-top: 100px;
-    
+
     input {
       background-color: #c2c2c2;
       outline: 0;

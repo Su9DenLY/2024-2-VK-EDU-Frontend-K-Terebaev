@@ -13,7 +13,7 @@ if (users.length === 0 && chats.length === 0) {
     users.push({'id': 1, 'username': 'Элизабет', 'chats': [1, 3]})
     users.push({'id': 2, 'username': 'Дженнифер', 'chats': [1, 2, 4]})
     users.push({'id': 3, 'username': 'Иннокентий', 'chats': [4]})
-    users.push({'id': 4, 'username': 'Евлампий', 'chats': [2, 3]})
+        users.push({'id': 4, 'username': 'Евлампий', 'chats': [2, 3]})
     chats.push({'id': 1, 'users': [1, 2], 'messages': []})
     chats.push({'id': 2, 'users': [2, 4], 'messages': []})
     chats.push({'id': 3, 'users': [1, 4], 'messages': []})
