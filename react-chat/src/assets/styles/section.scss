@@ -1,0 +1,35 @@
+@import "animations";
+
+.section {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+
+
+  &-chats {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background-color: #202329;
+    animation: screenToLeft 0.3s ease-in-out forwards;
+    padding: 5px;
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  &-messages {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex-grow: 1;
+    padding: 5px 0;
+    background-color: transparent;
+    width: 100%;
+    max-width: 45rem;
+    margin: 0 auto;
+    animation: screenToRight 0.3s ease-in-out forwards;
+  }
+}
