@@ -41,7 +41,7 @@ export default function ChatList() {
             scrollRef.current.addEventListener('scroll', handleScroll);
 
             return () => {
-                scrollRef.current.removeEventListener('scroll', handleScroll);
+                scrollRef.current?.removeEventListener('scroll', handleScroll);
             };
         } else {
             const section = sectionRef.current
