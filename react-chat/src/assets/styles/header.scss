@@ -1,0 +1,59 @@
+@import "animations";
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  width: 100%;
+  background-color: #2e333d;
+
+  &-chat {
+    animation: screenToRight 0.3s ease-in-out forwards;
+  }
+
+  &-chat-list {
+    animation: screenToLeft 0.3s ease-in-out forwards;
+  }
+
+  & > div {
+    display: flex;
+  }
+
+  &-recipient {
+    display: flex;
+    gap: 5px;
+
+    &-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      padding: 3px;
+    }
+
+    &-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &-username {
+        font-size: 18px;
+        font-weight: bold;
+        color: #c9c9c9;
+      }
+
+      &-online {
+        font-size: 12px;
+        color: #9e9e9e;
+      }
+    }
+  }
+
+  &-app-name {
+    font-size: 20px;
+    color: #c9c9c9;
+    align-self: center;
+  }
+}

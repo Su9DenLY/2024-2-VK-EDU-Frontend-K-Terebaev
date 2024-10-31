@@ -1,0 +1,76 @@
+@mixin button-styles {
+  display: flex;
+  align-items: center;
+  border: none;
+  padding: 10px;
+  width: fit-content;
+  background-color: transparent;
+  border-radius: 100px;
+  transition: background-color 0.25s;
+  &:focus {
+    outline: none;
+  }
+}
+
+button, .button {
+  &-white {
+    color: #c9c9c9;
+    @include button-styles;
+
+    &:hover {
+      background-color: #96959576;
+      cursor: pointer;
+    }
+  }
+
+  &-gray {
+    @include button-styles;
+    color: #b8b8b8;
+    background-color: #2e333d;
+
+    &:hover {
+      background-color: #96959576;
+      transition: background-color 0.25s;
+      cursor: pointer;
+    }
+  }
+
+  &-send {
+    @include button-styles;
+    background-color: #2e333d;
+    color: #b8b8b8;
+
+    &:hover {
+      background-color: #96959576;
+      transition: background-color 0.25s;
+      cursor: pointer;
+    }
+  }
+
+  &-add-chat {
+    @include button-styles;
+    background-color: #644b6b;
+
+    &:hover {
+      box-shadow: 0 0.5px 10px 1px #96959576;
+      transition: box-shadow 0.25s;
+      cursor: pointer;
+    }
+  }
+}
+
+.visibleAddChatButton {
+  position: absolute;
+  bottom: 1rem;
+  right: 25px;
+  opacity: 1;
+  transition: all .3s ease-in-out;
+}
+
+.invisibleAddChatButton {
+  position: absolute;
+  bottom: -5rem;
+  right: 25px;
+  opacity: 0;
+  transition: all .3s ease-in-out;
+}
