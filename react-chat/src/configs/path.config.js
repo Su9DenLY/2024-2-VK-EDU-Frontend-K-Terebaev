@@ -1,5 +1,5 @@
 class PathConfig {
-    prefixPath = '';
+    prefixPath = import.meta.env.MODE === 'development' ? '' : '/2024-2-VK-EDU-Frontend-K-Terebaev';
     basePath = this.concatPath("/")
     chatsPath = this.concatPath("/chats")
     concatPath(path) {

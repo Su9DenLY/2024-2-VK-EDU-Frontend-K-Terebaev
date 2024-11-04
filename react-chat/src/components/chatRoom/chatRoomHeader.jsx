@@ -33,7 +33,7 @@ export default function ChatRoomHeader({recipientData}) {
                 <ArrowBackIcon/>
             </button>
             <div className="header-recipient">
-                <img className="header-recipient-avatar" alt="avatar" src={`/cat.jpg`}/>
+                <img className="header-recipient-avatar" alt="avatar" src={`${pathConfig.prefixPath}/cat.jpg`}/>
                 <div className="header-recipient-info">
                     <span className="header-recipient-info-username">{recipientData?.username}</span>
                     <span className="header-recipient-info-online">была 2 часа назад</span>
