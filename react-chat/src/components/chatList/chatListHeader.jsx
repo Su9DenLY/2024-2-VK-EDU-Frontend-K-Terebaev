@@ -5,9 +5,12 @@ import '@/assets/styles/header.scss'
 import '@/assets/styles/buttons.scss'
 import {useContext} from "react";
 import {AppContext} from "../../AppContext.jsx";
+import {pathConfig} from "../../configs/path.config.js";
+import {useNavigate} from "react-router-dom";
 
 export default function ChatListHeader() {
-    const {setCurrentUserId, setChatId} = useContext(AppContext)
+    const {setCurrentUserId} = useContext(AppContext)
+    const navigate = useNavigate()
     return (
         <div className="header header-chat-list">
             <div>
@@ -17,7 +20,7 @@ export default function ChatListHeader() {
                 <button className="button-white" id="button-logout"
                         onClick={() => {
                             setCurrentUserId(null)
-                            setChatId(null)
+                            navigate(pathConfig.basePath)
                         }}
                 >
                     <LogoutIcon/>

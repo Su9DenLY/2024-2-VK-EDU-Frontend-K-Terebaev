@@ -1,11 +1,11 @@
 import ChatList from "../components/chatList/chatList.jsx";
 import ChatRoom from "../components/chatRoom/chatRoom.jsx";
-import {useContext, useEffect, useState} from "react";
-import {AppContext} from "../AppContext.jsx";
+import {useEffect, useState} from "react";
+import {Outlet, useParams} from "react-router-dom";
 
 export default function MainPage() {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
-    const {chatId} = useContext(AppContext);
+    const {id: chatId} = useParams();
 
     useEffect(() => {
         const handleResize = () => {
@@ -22,7 +22,7 @@ export default function MainPage() {
             {
                 windowWidth > 700 ? <>
                     <ChatList/>
-                    <ChatRoom/>
+                    <Outlet/>
                 </> : chatId > 0 ? <ChatRoom/> : <ChatList/>
             }
         </div>

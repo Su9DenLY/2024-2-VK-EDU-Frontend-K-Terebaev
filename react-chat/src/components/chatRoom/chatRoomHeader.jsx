@@ -6,10 +6,12 @@ import '@/assets/styles/header.scss'
 import '@/assets/styles/buttons.scss'
 import {useContext} from "react";
 import {AppContext} from "../../AppContext.jsx";
+import {useNavigate} from "react-router-dom";
+import {pathConfig} from "../../configs/path.config.js";
 
 export default function ChatRoomHeader({recipientData}) {
-    const {chats, chatId, setChats, setChatId, base} = useContext(AppContext)
-
+    const {chats, chatId, setChats} = useContext(AppContext)
+    const navigate = useNavigate()
     const handleDelete = () => {
         const newChats = chats?.map(chat => {
             if (chat?.id === chatId) {
@@ -26,12 +28,12 @@ export default function ChatRoomHeader({recipientData}) {
     return (
         <div className="header header-chat">
             <button className="button-white" id="arrow_back" onClick={() => {
-                setChatId(0)
+                navigate(pathConfig.chatsPath)
             }}>
                 <ArrowBackIcon/>
             </button>
             <div className="header-recipient">
-                <img className="header-recipient-avatar" alt="avatar" src={`${base}/cat.jpg`}/>
+                <img className="header-recipient-avatar" alt="avatar" src={`/cat.jpg`}/>
                 <div className="header-recipient-info">
                     <span className="header-recipient-info-username">{recipientData?.username}</span>
                     <span className="header-recipient-info-online">была 2 часа назад</span>

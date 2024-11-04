@@ -1,11 +1,13 @@
 import {AppContext} from "../AppContext.jsx";
 import {useContext, useState} from "react";
 import "@/assets/styles/login.scss"
+import {useNavigate} from "react-router-dom";
+import {pathConfig} from "../configs/path.config.js";
 
 export default function LoginPage() {
     const {users, setUsers, setCurrentUserId} = useContext(AppContext);
     const [inputValue, setInputValue] = useState("");
-
+    const navigate = useNavigate();
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -28,6 +30,7 @@ export default function LoginPage() {
                 }])
                 setCurrentUserId(newUserId);
             }
+            navigate(pathConfig.concatPath('/chats'))
         }
     }
 
