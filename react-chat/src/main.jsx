@@ -5,6 +5,8 @@ import './index.scss'
 import {BrowserRouter as Router} from "react-router-dom";
 import {AppProvider} from "./AppContext.jsx";
 
+
+    console.log(window.location.origin)
 createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Router>
