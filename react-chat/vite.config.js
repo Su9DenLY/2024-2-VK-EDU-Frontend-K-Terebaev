@@ -4,6 +4,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.NODE_ENV === 'production' ? '/2024-2-VK-EDU-Frontend-K-Terebaev/' : '/',
   server: {
     port: 3000,
     watch: {
