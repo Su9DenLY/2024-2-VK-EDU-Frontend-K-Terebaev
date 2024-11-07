@@ -5,11 +5,18 @@
     padding: 10px;
     gap: 10px;
 
-    &:hover {
-      background-color: #2e333d;
-      border-radius: 30px;
-      transition: background-color 0.25s;
-      cursor: pointer;
+    &-active {
+      border-radius: 15px;
+      background-color: #644b6b;
+    }
+
+    &-inactive {
+      &:hover {
+        background-color: #2e333d;
+        border-radius: 15px;
+        transition: background-color 0.25s;
+        cursor: pointer;
+      }
     }
   }
 

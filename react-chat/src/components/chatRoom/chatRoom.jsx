@@ -4,43 +4,35 @@ import {AppContext} from "../../AppContext.jsx";
 import {useContext, useEffect, useState} from "react";
 import ChatRoomMessages from "./chatRoomMessages.jsx";
 import ChatForm from "./chatForm.jsx";
+import {useNavigate, useParams} from "react-router-dom";
+import {pathConfig} from "../../configs/path.config.js";
 
 export default function ChatRoom() {
-    const {chats, chatId, setChatId, users, currentUserId} = useContext(AppContext);
-
-    const idRecipient = chats?.find(chat => chat?.id === chatId)?.users?.find(id => id !== currentUserId)
-    const recipientData = users?.find(user => user?.id === idRecipient);
+    const {chats, users, currentUserId} = useContext(AppContext);
+    const [recipientData, setRecipientData] = useState(null);
+    const {id: chatId} = useParams()
+    const navigate = useNavigate()
     const [messagesHistory, setMessagesHistory] = useState([])
 
     useEffect(() => {
-        if (chatId > 0) {
-            setMessagesHistory(chats?.find(chat => chat?.id === chatId)?.messages)
-        } else {
-            setMessagesHistory([])
-        }
+        const idRecipient = chats?.find(chat => chat?.id === parseInt(chatId))?.users?.find(id => id !== currentUserId)
+        const recipientData = users?.find(user => user?.id === idRecipient);
+        setRecipientData(recipientData)
+        setMessagesHistory(chats?.find(chat => chat?.id === parseInt(chatId))?.messages)
     }, [chats, chatId])
-    
+
     useEffect(() => {
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                setChatId(0)
+                navigate(pathConfig.chatsPath)
             }
         })
     }, []);
     return (
         <div className="wrapper-chat-room">
-            {
-                chatId ? <>
-                        <ChatRoomHeader recipientData={recipientData}/>
-                        <ChatRoomMessages messagesHistory={messagesHistory}/>
-                        <ChatForm/>
-                    </>
-                    : <div className='wrapper-chat-room-empty'>
-                        <div className='wrapper-chat-room-empty-content'>
-                            Выберите диалог
-                        </div>
-                    </div>
-            }
+            <ChatRoomHeader recipientData={recipientData}/>
+            <ChatRoomMessages messagesHistory={messagesHistory}/>
+            <ChatForm/>
         </div>
     )
 }

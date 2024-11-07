@@ -1,4 +1,4 @@
-@import "animations";
+@use "animations";
 
 .header {
   display: flex;
@@ -9,12 +9,14 @@
   padding: 0 5px;
   width: 100%;
   background-color: #2e333d;
+  position: relative;
+  z-index: 1;
 
   &-chat {
     animation: screenToRight 0.3s ease-in-out forwards;
   }
 
-  &-chat-list {
+  &-sidebar {
     animation: screenToLeft 0.3s ease-in-out forwards;
   }
 
@@ -51,9 +53,10 @@
     }
   }
 
-  &-app-name {
+  &-title {
     font-size: 20px;
     color: #c9c9c9;
     align-self: center;
+    justify-self: center;
   }
 }

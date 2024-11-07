@@ -1,6 +1,5 @@
 import '@/assets/styles/chat.scss'
-import {useContext} from "react";
-import {AppContext} from "../../AppContext.jsx";
+import {pathConfig} from "../../configs/path.config.js";
 
 export default function ChatContainer({
                                           chatId,
@@ -10,14 +9,13 @@ export default function ChatContainer({
                                           lastMessageCheck,
                                           setChatId
                                       }) {
-    const {base} = useContext(AppContext);
     return (
         <li className="chat-container" id={chatId} onClick={() => {
             setChatId(chatId)
         }
         }>
             <div className="chat-avatar">
-                <img src={`${base}/cat.jpg`} className="chat-avatar" alt="avatar"/>
+                <img src={`${pathConfig.pathToIcons}/cat.jpg`} className="chat-avatar" alt="avatar"/>
             </div>
             <div className="chat-info">
                 <div className="chat-info-row">

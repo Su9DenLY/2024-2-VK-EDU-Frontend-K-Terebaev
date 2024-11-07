@@ -6,12 +6,12 @@ import {AppContext} from "../../AppContext.jsx";
 const MessageContainer = forwardRef(({message}, ref) => {
     const {users, currentUserId} = useContext(AppContext);
 
-    const senderUsername = users.find(userItem => userItem.id === message.senderId).username
-    
+    const senderUsername = users.find(userItem => userItem.id === message.senderId).fullname
+
     const messageContainerClass = message.senderId === currentUserId ? "message-my-container" : "message-other-container";
     const messageUsernameClass = message.senderId === currentUserId ? "message-my-username" : "message-other-username";
     const messageContentClass = message.senderId === currentUserId ? "message-my-content" : "message-other-content";
-    
+
     return (
         <li ref={ref} className={messageContainerClass}>
             <div className={messageUsernameClass}>
@@ -21,7 +21,7 @@ const MessageContainer = forwardRef(({message}, ref) => {
                 {message?.text}
                 <div className="message-status">
                     {message?.time}
-                    <CheckIcon className='test'/>
+                    <CheckIcon className='message-status-check'/>
                 </div>
             </div>
         </li>
