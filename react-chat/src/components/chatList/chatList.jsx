@@ -5,7 +5,7 @@ import {useContext, useEffect, useRef, useState} from "react";
 import {AppContext} from "../../AppContext.jsx";
 import AddChatButton from "./addChatButton.jsx";
 
-export default function ChatList() {
+export default function ChatList({setSection}) {
     const {chats, users, currentUserId, setChatId} = useContext(AppContext);
 
     const [chatsToShow, setChatsToShow] = useState();
@@ -59,8 +59,8 @@ export default function ChatList() {
 
 
     return (
-        <div className="wrapper-chat-list" ref={sectionRef}>
-            <ChatListHeader/>
+        <div className="wrapper-sidebar" ref={sectionRef}>
+            <ChatListHeader setSection={setSection}/>
             <ChatListMain setChatId={setChatId} chatsToShow={chatsToShow} users={users} userId={currentUserId}
                           ref={scrollRef}/>
             <AddChatButton ref={addChatButtonRef}/>

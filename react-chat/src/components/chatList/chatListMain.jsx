@@ -10,10 +10,10 @@ const setActive = ({isActive}) => isActive ? 'chat-container-active' : 'chat-con
 const ChatListMain = forwardRef(({setChatId, chatsToShow, users, userId}, scrollRef) => {
     return (
         <ul className="section-chats" ref={scrollRef}>
-            {chatsToShow?.map((chatItem,index) => {
+            {chatsToShow?.map((chatItem, index) => {
                 const recipientId = chatItem.users.find(id => id !== userId);
                 const recipient = users.find(userItem => userItem.id === recipientId);
-                const recipientName = recipient ? recipient.username : 'Unknown';
+                const recipientName = recipient ? recipient.fullname : 'Unknown';
                 const lastMessage = chatItem.messages.slice(-1)[0];
 
                 return (

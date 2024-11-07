@@ -12,8 +12,8 @@ export default function ChatForm() {
 
     const handleResize = () => {
         if (textareaRef.current) {
-            textareaRef.current.style.height = '0'
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+            textareaRef.current.style.height = `0`
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight < 50 ? 50 : textareaRef.current.scrollHeight}px`
         }
     };
 

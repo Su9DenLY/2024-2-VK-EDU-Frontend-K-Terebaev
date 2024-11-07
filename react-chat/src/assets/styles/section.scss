@@ -1,4 +1,4 @@
-@import "animations";
+@use "animations";
 
 .section {
   display: flex;
@@ -8,8 +8,7 @@
   overflow-x: hidden;
   width: 100%;
   height: 100%;
-
-
+  
   &-chats {
     display: flex;
     flex-direction: column;

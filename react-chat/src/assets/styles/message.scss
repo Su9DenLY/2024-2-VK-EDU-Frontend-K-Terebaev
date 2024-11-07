@@ -1,4 +1,4 @@
-@import "animations";
+@use "animations";
 
 .message {
   &-my-container, &-other-container {
@@ -53,9 +53,9 @@
     align-items: center;
     font-size: 10px;
     color: #7a787a;
-  }
-}
 
-.test {
-  transform: scale(0.6);
+    &-check {
+      transform: scale(0.6);
+    }
+  }
 }
