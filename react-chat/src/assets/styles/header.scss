@@ -3,7 +3,8 @@
 .header {
   display: flex;
   flex-shrink: 0;
-  height: 50px;
+  min-height: 50px;
+  height: fit-content;
   align-items: center;
   justify-content: space-between;
   padding: 0 5px;
