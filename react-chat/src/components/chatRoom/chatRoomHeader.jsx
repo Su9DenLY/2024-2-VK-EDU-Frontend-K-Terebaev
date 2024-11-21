@@ -8,22 +8,12 @@ import {useContext} from "react";
 import {AppContext} from "../../AppContext.jsx";
 import {useNavigate} from "react-router-dom";
 import {pathConfig} from "../../configs/path.config.js";
+import {formatDate} from "../../utils/lib.js";
+import AvatarImage from "../common/avatarImage.jsx";
 
-export default function ChatRoomHeader({recipientData}) {
-    const {chats, chatId, setChats} = useContext(AppContext)
+export default function ChatRoomHeader() {
     const navigate = useNavigate()
-    const handleDelete = () => {
-        const newChats = chats?.map(chat => {
-            if (chat?.id === chatId) {
-                return {
-                    ...chat,
-                    messages: [],
-                }
-            }
-            return chat
-        })
-        setChats(newChats)
-    }
+    const {recipientData} = useContext(AppContext);
 
     return (
         <div className="header header-chat">
@@ -33,17 +23,19 @@ export default function ChatRoomHeader({recipientData}) {
                 <ArrowBackIcon/>
             </button>
             <div className="header-recipient">
-                <img className="header-recipient-avatar" alt="avatar" src={`${pathConfig.pathToIcons}/cat.jpg`}/>
+                <AvatarImage userItem={recipientData}/>
                 <div className="header-recipient-info">
-                    <span className="header-recipient-info-username">{recipientData?.fullname}</span>
-                    <span className="header-recipient-info-online">была 2 часа назад</span>
+                    <span
+                        className="header-recipient-info-username">{recipientData?.first_name + ' ' + recipientData?.last_name}</span>
+                    <span
+                        className="header-recipient-info-online">был(-а) в сети {formatDate(recipientData?.last_online_at)}</span>
                 </div>
             </div>
             <div>
                 <button className="button-white">
                     <SearchIcon/>
                 </button>
-                <button className="button-white" onClick={handleDelete}>
+                <button className="button-white">
                     <DeleteOutlineOutlinedIcon/>
                 </button>
                 <button className="button-white">

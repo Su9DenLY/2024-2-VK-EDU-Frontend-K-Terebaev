@@ -9,6 +9,12 @@ export default function ProfileEditField({logo, title, text, onChange, placehold
         textarea.style.height = `${10 + textarea.scrollHeight}px`;
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault()
+        }
+    };
+
     useEffect(() => {
         handleResize();
     }, [text]);
@@ -23,7 +29,9 @@ export default function ProfileEditField({logo, title, text, onChange, placehold
                           value={text}
                           placeholder={placeholder}
                           onChange={onChange}
+                          onKeyDown={handleKeyDown}
                           onInput={handleResize}
+                          rows={1}
                 />
             </div>
         </div>

@@ -20,7 +20,7 @@
     display: flex;
     justify-content: end;
     font-size: 13px;
-    color: #c9c9c9;
+    color: var(--text-color);
   }
 
   &-other-username {
@@ -30,7 +30,7 @@
   &-my-content, &-other-content {
     display: flex;
     flex-direction: column;
-    color: #c9c9c9;
+    color: var(--text-color);
     background-color: #644b6b;
     border-radius: 10px 10px 0 10px;
     box-shadow: 0 0.5px 5px 0.1px rgba(0, 0, 0, 0.5);

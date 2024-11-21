@@ -14,7 +14,7 @@
 
 .button {
   &-white {
-    color: #c9c9c9;
+    color: var(--text-color);
     @include button-styles;
 
     &:hover {

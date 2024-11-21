@@ -14,22 +14,22 @@
 
 button, .button {
   &-white {
-    color: #c9c9c9;
+    color: var(--primary-text-color);
     @include button-styles;
 
     &:hover {
-      background-color: #96959576;
+      background-color: var(--button-on-hover-bg-color);
       cursor: pointer;
     }
   }
 
   &-gray {
     @include button-styles;
-    color: #b8b8b8;
-    background-color: #2e333d;
+    color: var(--primary-text-color);
+    background-color: var(--tertiary-bg-color);
 
     &:hover {
-      background-color: #96959576;
+      background-color: var(--button-on-hover-bg-color);
       transition: background-color 0.25s;
       cursor: pointer;
     }
@@ -37,11 +37,11 @@ button, .button {
 
   &-send {
     @include button-styles;
-    background-color: #2e333d;
-    color: #b8b8b8;
+    background-color: var(--tertiary-bg-color);
+    color: var(--primary-text-color);
 
     &:hover {
-      background-color: #96959576;
+      background-color: var(--button-on-hover-bg-color);
       transition: background-color 0.25s;
       cursor: pointer;
     }
@@ -49,10 +49,10 @@ button, .button {
 
   &-add-chat {
     @include button-styles;
-    background-color: #644b6b;
+    background-color: var(--quaternary-bg-color);
 
     &:hover {
-      box-shadow: 0 0.5px 10px 1px #96959576;
+      box-shadow: 0 0.5px 10px 1px var(--button-on-hover-bg-color);
       transition: box-shadow 0.25s;
       cursor: pointer;
     }

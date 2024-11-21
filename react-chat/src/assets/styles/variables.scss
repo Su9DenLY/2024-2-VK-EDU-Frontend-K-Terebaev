@@ -1,0 +1,39 @@
+:root {
+  --primary-bg-color: rgba(32, 35, 41, 1); // Самый темный фон
+  --secondary-bg-color: rgba(42, 46, 55, 1); // Цвет фона поверх самого темного
+  --tertiary-bg-color: rgba(46, 51, 61, 1); // Еще светлее. Есть на header'е
+  --quaternary-bg-color: rgba(100, 75, 107, 1); // Цвет для выбранного чата, сообщений и фокуса на input
+  --chat-room-bg-color: rgba(15, 15, 15, 1); // Цвет для фона секции с сообщениями
+  --primary-text-color: rgba(201, 201, 201, 1); // Основной текст везде
+  --secondary-text-color: rgba(158, 158, 158, 1); // Цвет темнее для header'а и статуса сообщения
+  --tertiary-text-color: rgba(128, 128, 128, 1); // Цвет темнее для sidebar'а
+  --dropdown-bg-color: rgba(61, 60, 61, 0.81);
+  --dropdown-hover-bg-color: rgba(23, 24, 27, 0.81);
+  --empty-tile-bg-color: rgba(221, 218, 218, 0.07);
+  --profile-title-field-color: rgba(201, 201, 201, 0.4);
+  --message-box-shadow-color: rgba(0, 0, 0, 0.5);
+  --user-avatar-bg-color: rgba(155, 114, 166, 1);
+  --button-on-hover-bg-color: rgba(85, 85, 85, 1);
+  --scroll-on-hover-color: rgba(85, 85, 85, 1);
+  --placeholder-color: rgba(136, 136, 136, 1)
+}
+
+[data-theme="light"] {
+  --primary-bg-color: rgba(32, 35, 41, 1);
+  --secondary-bg-color: rgba(42, 46, 55, 1);
+  --tertiary-bg-color: rgba(46, 51, 61, 1);
+  --quaternary-bg-color: rgba(100, 75, 107, 1);
+  --chat-room-bg-color: rgba(15, 15, 15, 1);
+  --primary-text-color: rgba(201, 201, 201, 1);
+  --secondary-text-color: rgba(158, 158, 158, 1);
+  --tertiary-text-color: rgba(128, 128, 128, 1);
+  --dropdown-bg-color: rgba(61, 60, 61, 0.81);
+  --dropdown-hover-bg-color: rgba(23, 24, 27, 0.81);
+  --empty-tile-bg-color: rgba(221, 218, 218, 0.07);
+  --profile-title-field-color: rgba(201, 201, 201, 0.4);
+  --message-box-shadow-color: rgba(0, 0, 0, 0.5);
+  --user-avatar-bg-color: rgba(155, 114, 166, 1);
+  --button-on-hover-bg-color: rgba(85, 85, 85, 1);
+  --scroll-on-hover-color: rgba(85, 85, 85, 1);
+  --placeholder-color: rgba(136, 136, 136, 1)
+}

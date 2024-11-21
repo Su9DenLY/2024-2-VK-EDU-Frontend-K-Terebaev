@@ -1,34 +1,35 @@
-import CheckIcon from '@mui/icons-material/Check';
 import ChatContainer from "./chatContainer.jsx";
 import '@/assets/styles/section.scss'
-import {forwardRef} from "react";
+import {forwardRef, useContext} from "react";
 import {NavLink} from "react-router-dom";
 import {pathConfig} from "../../configs/path.config.js";
+import {AppContext} from "../../AppContext.jsx";
 
 const setActive = ({isActive}) => isActive ? 'chat-container-active' : 'chat-container-inactive';
 
-const ChatListMain = forwardRef(({setChatId, chatsToShow, users, userId}, scrollRef) => {
+const ChatListMain = forwardRef(({chatsToShow, currentSearchText}, scrollRef) => {
+    const {setRecipientData, currentUser} = useContext(AppContext);
     return (
         <ul className="section-chats" ref={scrollRef}>
             {chatsToShow?.map((chatItem, index) => {
-                const recipientId = chatItem.users.find(id => id !== userId);
-                const recipient = users.find(userItem => userItem.id === recipientId);
-                const recipientName = recipient ? recipient.fullname : 'Unknown';
-                const lastMessage = chatItem.messages.slice(-1)[0];
+                if (currentSearchText?.trim()) {
+                    if (chatItem?.title.toLowerCase().includes(currentSearchText.toLowerCase())) {
+                        return (
+                            <NavLink key={index} to={pathConfig.chatsPath + `/${chatItem.id}`} className={setActive}
+                                     onClick={() => setRecipientData(chatItem.members.filter(item => item.id !== currentUser.id)[0])}>
+                                <ChatContainer key={chatItem.id} chatItem={chatItem}/>
+                            </NavLink>
+                        );
+                    }
+                } else {
+                    return (
+                        <NavLink key={index} to={pathConfig.chatsPath + `/${chatItem.id}`} className={setActive}
+                                 onClick={() => setRecipientData(chatItem.members.filter(item => item.id !== currentUser.id)[0])}>
+                            <ChatContainer key={chatItem.id} chatItem={chatItem}/>
+                        </NavLink>
+                    );
+                }
 
-                return (
-                    <NavLink key={index} to={pathConfig.chatsPath + `/${chatItem.id}`} className={setActive}>
-                        <ChatContainer
-                            key={chatItem.id}
-                            chatId={chatItem.id}
-                            recipientName={recipientName}
-                            lastMessageText={lastMessage?.text || ''}
-                            lastMessageTime={lastMessage?.time || ''}
-                            lastMessageCheck={lastMessage && lastMessage?.senderId !== recipientId ? <CheckIcon/> : ''}
-                            setChatId={setChatId}
-                        />
-                    </NavLink>
-                );
             })}
         </ul>
     )

@@ -1,25 +1,44 @@
 import ChatRoomHeader from "./chatRoomHeader.jsx";
 import "../../index.scss"
 import {AppContext} from "../../AppContext.jsx";
-import {useContext, useEffect, useState} from "react";
+import {useContext, useEffect} from "react";
 import ChatRoomMessages from "./chatRoomMessages.jsx";
 import ChatForm from "./chatForm.jsx";
 import {useNavigate, useParams} from "react-router-dom";
 import {pathConfig} from "../../configs/path.config.js";
+import {ChatWorker} from "../../api/chat.js";
+import useSWR from "swr";
 
 export default function ChatRoom() {
-    const {chats, users, currentUserId} = useContext(AppContext);
-    const [recipientData, setRecipientData] = useState(null);
-    const {id: chatId} = useParams()
+    const {setRecipientData, currentUser} = useContext(AppContext);
     const navigate = useNavigate()
-    const [messagesHistory, setMessagesHistory] = useState([])
+    const {id} = useParams()
+
+    const fetcher = () => ChatWorker.getMessages(id).then(r => r.data.results.reverse())
+
+    const {data} = useSWR(
+        id ? `messagesFetcher/${id}` : null,
+        fetcher,
+        {
+            fallbackData: [],
+            revalidateOnFocus: true,
+            refreshInterval: 300,
+        }
+    )
+
 
     useEffect(() => {
-        const idRecipient = chats?.find(chat => chat?.id === parseInt(chatId))?.users?.find(id => id !== currentUserId)
-        const recipientData = users?.find(user => user?.id === idRecipient);
-        setRecipientData(recipientData)
-        setMessagesHistory(chats?.find(chat => chat?.id === parseInt(chatId))?.messages)
-    }, [chats, chatId])
+        const getChatById = async () => {
+            try {
+                const res = await ChatWorker.getChatById(id);
+                setRecipientData(res.data?.members?.filter(item => item.id !== currentUser.id && item.username !== currentUser.username)[0])
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        if (currentUser)
+            getChatById();
+    }, [currentUser]);
 
     useEffect(() => {
         window.addEventListener('keydown', (e) => {
@@ -30,8 +49,8 @@ export default function ChatRoom() {
     }, []);
     return (
         <div className="wrapper-chat-room">
-            <ChatRoomHeader recipientData={recipientData}/>
-            <ChatRoomMessages messagesHistory={messagesHistory}/>
+            <ChatRoomHeader/>
+            <ChatRoomMessages messagesHistory={data}/>
             <ChatForm/>
         </div>
     )

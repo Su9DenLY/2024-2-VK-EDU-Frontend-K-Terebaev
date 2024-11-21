@@ -14,7 +14,7 @@ export default function ChatRoomMessages({messagesHistory}) {
             <ul className="section-messages">
                 {messagesHistory?.map((message, index) => {
                         return (
-                            <MessageContainer key={`${index}-${message.senderId}-${message.text}`}
+                            <MessageContainer key={`${message.id}`}
                                               message={message}
                                               ref={index === messagesHistory.length - 1 ? lastMessageRef : null}
                             />)

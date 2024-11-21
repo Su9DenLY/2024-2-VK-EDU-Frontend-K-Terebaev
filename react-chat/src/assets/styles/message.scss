@@ -20,7 +20,7 @@
     display: flex;
     justify-content: end;
     font-size: 13px;
-    color: #c9c9c9;
+    color: var(--primary-text-color);
   }
 
   &-other-username {
@@ -30,10 +30,10 @@
   &-my-content, &-other-content {
     display: flex;
     flex-direction: column;
-    color: #c9c9c9;
-    background-color: #644b6b;
+    color: var(--primary-text-color);
+    background-color: var(--quaternary-bg-color);
     border-radius: 10px 10px 0 10px;
-    box-shadow: 0 0.5px 5px 0.1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0.5px 5px 0.1px var(--message-box-shadow-color);
     margin: 4px 4px 4px auto;
     padding: 5px 10px;
     width: fit-content;
@@ -42,7 +42,7 @@
   }
 
   &-other-content {
-    background-color: #2e333d;
+    background-color: var(--tertiary-bg-color);
     border-radius: 10px 10px 10px 0;
     margin: 4px 4px auto 4px;
   }
@@ -52,7 +52,7 @@
     justify-content: end;
     align-items: center;
     font-size: 10px;
-    color: #7a787a;
+    color: var(--secondary-text-color);
 
     &-check {
       transform: scale(0.6);

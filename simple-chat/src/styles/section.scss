@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    background-color: #202329;
+    background-color: var(--main-bg-color);
     animation: screenToLeft 0.3s ease-in-out forwards;
   }
 
@@ -21,7 +21,7 @@
     justify-content: flex-end;
     flex-grow: 1;
     padding: 5px 0;
-    background-color: #202329;
+    background-color: var(--main-bg-color);
     animation: screenToRight 0.3s ease-in-out forwards;
   }
 }

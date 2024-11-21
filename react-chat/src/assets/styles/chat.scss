@@ -4,15 +4,16 @@
     width: 100%;
     padding: 10px;
     gap: 10px;
+    max-height: 65px;
 
     &-active {
       border-radius: 15px;
-      background-color: #644b6b;
+      background-color: var(--quaternary-bg-color);
     }
 
     &-inactive {
       &:hover {
-        background-color: #2e333d;
+        background-color: var(--tertiary-bg-color);
         border-radius: 15px;
         transition: background-color 0.25s;
         cursor: pointer;
@@ -44,17 +45,20 @@
     font-family: Helvetica, Arial, sans-serif;
     font-size: 18px;
     font-weight: 600;
-    color: #c9c9c9;
+    color: var(--primary-text-color);
     align-self: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &-last-message {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 15px;
     font-weight: 400;
-    color: gray;
-    white-space: nowrap;
+    color: var(--tertiary-text-color);
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 
     &-meta {
@@ -64,7 +68,12 @@
     }
 
     &-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: purple;
+      max-height: 15px;
+      max-width: 15px;
     }
 
     &-time {
