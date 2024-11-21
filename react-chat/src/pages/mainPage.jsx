@@ -47,7 +47,7 @@ export default function MainPage() {
                 windowWidth > 700 ? <>
                     {sectionComponents[section]}
                     <Outlet/>
-                </> : chatId > 0 ? <ChatRoom/> : <>{sectionComponents[section]}</>
+                </> : chatId ? <ChatRoom/> : <>{sectionComponents[section]}</>
             }
         </div>
     )
