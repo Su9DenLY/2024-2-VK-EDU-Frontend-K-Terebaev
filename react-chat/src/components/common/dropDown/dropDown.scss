@@ -5,7 +5,7 @@
   top: 50px;
   left: 10px;
   backdrop-filter: blur(3px);
-  background-color: rgba(61, 60, 61, 0.81);
+  background-color: var(--dropdown-bg-color);
   border-radius: 5%;
   color: white;
   padding: 6px 4px;
@@ -22,7 +22,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: #17181b;
+      background-color: var(--dropdown-hover-bg-color);
     }
   }
 }

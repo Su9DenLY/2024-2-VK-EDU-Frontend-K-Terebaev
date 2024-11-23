@@ -1,0 +1,44 @@
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+
+  input {
+    width: 100%;
+    padding: 15px 15px;
+    background-color: var(--secondary-bg-color);
+    outline: none;
+    font-size: 16px;
+    color: var(--primary-text-color);
+    border: var(--primary-text-color) solid 2px;
+    border-radius: 20px;
+    transition: all 0.3s;
+
+    &:focus {
+      border: var(--quaternary-bg-color) solid 2px;
+    }
+
+    &:focus + label,
+    &:not(:placeholder-shown) + label {
+      transform: translateY(-25px);
+      font-size: 14px;
+      color: var(--primary-text-color);
+    }
+
+    &:focus + label {
+      color: var(--quaternary-bg-color);
+    }
+  }
+
+  label {
+    position: absolute;
+    background-color: var(--secondary-bg-color);
+    top: 15px;
+    left: 10px;
+    font-size: 16px;
+    color: var(--placeholder-color);
+    transition: transform 0.3s ease, font-size 0.3s ease, color 0.3s ease;
+    pointer-events: none;
+    padding: 0 5px;
+  }
+}

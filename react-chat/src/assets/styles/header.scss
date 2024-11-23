@@ -3,21 +3,39 @@
 .header {
   display: flex;
   flex-shrink: 0;
-  height: 50px;
+  min-height: 50px;
+  height: fit-content;
   align-items: center;
   justify-content: space-between;
   padding: 0 5px;
   width: 100%;
-  background-color: #2e333d;
+  background-color: var(--tertiary-bg-color);
   position: relative;
   z-index: 1;
 
   &-chat {
+    overflow: hidden;
     animation: screenToRight 0.3s ease-in-out forwards;
   }
 
   &-sidebar {
     animation: screenToLeft 0.3s ease-in-out forwards;
+
+    &-search {
+      width: 100%;
+      padding: 7px 15px;
+      background-color: var(--secondary-bg-color);
+      outline: none;
+      font-size: 16px;
+      color: var(--primary-text-color);
+      border: var(--primary-text-color) solid 1px;
+      border-radius: 20px;
+      transition: all 0.1s;
+
+      &:focus {
+        border: var(--quaternary-bg-color) solid 1px;
+      }
+    }
   }
 
   & > div {
@@ -27,35 +45,45 @@
   &-recipient {
     display: flex;
     gap: 5px;
+    max-width: 450px;
+    overflow: hidden;
 
     &-avatar {
-      width: 45px;
-      height: 45px;
+      min-width: 45px;
+      min-height: 45px;
+      max-width: 45px;
+      max-height: 45px;
       border-radius: 50%;
       padding: 3px;
     }
 
     &-info {
       display: flex;
+      width: 100%;
       flex-direction: column;
       justify-content: center;
+      overflow: hidden;
 
       &-username {
         font-size: 18px;
+        width: 100%;
         font-weight: bold;
-        color: #c9c9c9;
+        color: var(--primary-text-color);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       &-online {
         font-size: 12px;
-        color: #9e9e9e;
+        color: var(--secondary-text-color);
       }
     }
   }
 
   &-title {
     font-size: 20px;
-    color: #c9c9c9;
+    color: var(--primary-text-color);
     align-self: center;
     justify-self: center;
   }

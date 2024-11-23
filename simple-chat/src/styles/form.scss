@@ -5,14 +5,14 @@
   flex-shrink: 0;
   align-items: center;
   gap: 5px;
-  background-color: #202329;
+  background-color: var(--main-bg-color);
   height: fit-content;
   animation: screenToRight 0.3s ease-in-out forwards;
 
   &-textarea {
     border: 0;
     outline: none;
-    color: #c9c9c9;
+    color: var(--text-color);
     width: calc(100% - 2px);
     padding: 10px;
     background-color: #2e333d;

@@ -3,6 +3,9 @@
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 
   &-content {
     display: flex;
@@ -14,11 +17,26 @@
   }
 
   &-avatar {
-    width: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--primary-text-color);
+    align-self: center;
     height: 15rem;
+    width: 15rem;
+    min-width: 15rem;
     border-radius: 50%;
-    padding: 10px;
-    object-fit: cover;
+    background: var(--user-avatar-bg-color);
+    margin: 1rem;
+
+    > img {
+      height: 15rem;
+      width: 15rem;
+      border-radius: 50%;
+    }
   }
 
   &-field {
@@ -36,12 +54,12 @@
     }
 
     &-title {
-      color: rgba(201, 201, 201, 0.4);
+      color: var(--profile-title-field-color);
       align-self: start;
     }
 
     &-text {
-      color: #c9c9c9;
+      color: var(--primary-text-color);
       height: fit-content;
       min-height: 2rem;
       max-width: 15rem;
@@ -52,9 +70,9 @@
     }
 
     &-input {
-      background-color: #2e333d;
+      background-color: var(--tertiary-bg-color);
       border: none;
-      color: #c9c9c9;
+      color: var(--primary-text-color);
       height: fit-content;
       min-height: 2rem;
       font-size: 15px;
@@ -69,7 +87,7 @@
   }
 
   &-icon {
-    color: #c9c9c9;
+    color: var(--primary-text-color);
     margin-top: 1rem;
   }
 }

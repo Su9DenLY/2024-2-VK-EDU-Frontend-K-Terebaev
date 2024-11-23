@@ -16,10 +16,10 @@
   &-textarea {
     border: 0;
     outline: none;
-    color: #c9c9c9;
+    color: var(--primary-text-color);
     width: calc(100% - 2px);
     padding: 10px;
-    background-color: #2e333d;
+    background-color: var(--tertiary-bg-color);
     border-radius: 10px;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 15px;
@@ -29,7 +29,7 @@
     overflow: auto;
 
     &::placeholder {
-      color: #88898a;
+      color: var(--placeholder-color);
     }
   }
 }

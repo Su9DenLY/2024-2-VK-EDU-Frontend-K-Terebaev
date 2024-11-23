@@ -8,16 +8,18 @@
   overflow-x: hidden;
   width: 100%;
   height: 100%;
-  
-  &-chats {
+
+  &-chats, &-users {
     display: flex;
+    position: relative;
     flex-direction: column;
     flex-grow: 1;
-    background-color: #202329;
+    background-color: var(--primary-bg-color);
     animation: screenToLeft 0.3s ease-in-out forwards;
     padding: 5px;
     margin: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100%;
   }
 
